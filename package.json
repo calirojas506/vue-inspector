@@ -1,0 +1,24 @@
+{
+  "name": "vue-inspector",
+  "version": "1.0.0",
+  "description": "Vue.js Inspector for Mobile Devices",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calirojas506/vue-inspector.git"
+  },
+  "keywords": [
+    "vuejs",
+    "js",
+    "console",
+    "inspector"
+  ],
+  "author": "Cali Rojas <calirojas@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/calirojas506/vue-inspector/issues"
+  },
+  "homepage": "https://github.com/calirojas506/vue-inspector#readme",
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  }
+}
