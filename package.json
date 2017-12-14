@@ -1,6 +1,6 @@
 {
   "name": "vue-inspector",
-  "version": "1.0.0",
+  "version": "0.1.0 beta",
   "description": "Vue.js Inspector for Mobile Devices",
   "repository": {
     "type": "git",
@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/calirojas506/vue-inspector#readme",
   "dependencies": {
-    "bootstrap-sass": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "bootstrap-sass": "^3.3.7",
+    "vue": "^2.5.10"
   }
 }

@@ -1,0 +1,160 @@
+.vue-inspector{
+	@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #333;
+	background-color: #fff;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	*{
+		border-radius: 0 !important;
+		outline: 0 !important;
+	}
+
+	.container-fluid{
+		padding: 0;
+	}
+
+	.form-group{
+		margin-bottom: 0;
+	}
+
+	.panel{
+		margin-bottom: 0;
+		border: 0;
+
+		.panel-title{
+			font-size: large;
+		}
+	}
+
+	.panel-body{
+		.panel-sizes{
+		}
+
+		overflow-x: hidden;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+		// max-height: 250px;
+		min-height: 250px;
+		height: 250px;
+
+		.list-unstyled{
+			li{
+				padding: 1px 0;
+			}
+		}
+
+		details{
+			ul{
+				&.list-unstyled{
+					padding-left: 15px !important;
+
+					li{
+						padding: 0 !important;
+						margin: 0;
+						padding-left: 30px;
+					}
+				}
+			}
+
+			summary{
+				outline: 0;
+				font-weight: bold;
+			}
+
+			details{
+				padding-left: 15px;
+			}
+		}
+	}
+
+	.panel-heading{
+		padding-bottom: 0;
+		background-color: #35495E !important;
+		overflow: hidden;
+		border: 0 !important;
+
+		span.badge.counter{
+			background-color: #000;
+			color: #fff;
+			border: 0;
+			padding: 2px 5px;
+		}
+
+		img{
+			height: 35px;
+			margin-right: 5px;
+			display: inline-block;
+		}
+	}
+
+	&__output-counter{
+
+	}
+
+	&__tabs{
+		margin-top: 5px !important;
+		border-bottom: 0 !important;
+
+		&>li{
+			&>a{
+				padding: 10px 12px !important;
+				background: #35495E;
+				min-width: 40px;
+				text-align: center;
+				font-weight: normal !important;
+				color: #41b883 !important;
+				border: 0 !important;
+				margin-right: 0 !important;
+			}
+
+			&.active{
+				a{
+					background-color: #fff !important;
+				}
+			}
+		}
+	}
+
+	a{
+		color: #41b883;
+		font-weight: bold !important;
+
+		&:hover{
+			color: #35495E;
+		}
+
+		&:active, &:focus{
+			color: #41b883;
+		}
+	}
+
+	.btn-danger{
+		background: #41b883;
+		color: #fff;
+		border-color: #41b883;
+		border-width: 1px;
+	}
+	.btn-primary{
+		background: #35495E;
+		color: #fff;
+		border-color: #35495E;
+	}
+
+	.btn-empty{
+		padding: 0;
+		font-size: 2em;
+		min-width: 2em;
+		background: transparent;
+	}
+
+	.cursor-pointer{
+		cursor: pointer;
+	}
+}
