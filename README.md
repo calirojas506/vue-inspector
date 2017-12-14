@@ -59,8 +59,13 @@ This script is intended only for browsers, running on Mobile Devices, that lacks
 ![](/screenshots/vue-inspector-05.jpg)
 ![](/screenshots/vue-inspector-06.jpg)
 
-## Examples
-Download or clone this repo and open the **demo** folder.
+## Demo
+Download or clone this repo and open the **demo** folder,
+or open [this URL](http://calirojas1.000webhostapp.com/vue-inspector/demo) with your mobile device.
+
+## Compatibility
+I have tested this tool only with Android phones and tablets, and it's compatible with Google Chrome. If you have information about the compatibility with iOS, or/and other mobile browsers, please let me know.
+
 ## Stay In Touch
 
 - [Twitter](https://twitter.com/calirojas506)
