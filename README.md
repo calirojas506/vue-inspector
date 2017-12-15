@@ -11,7 +11,6 @@ With **vue-inspector** is possible to execute JavaScript code directly in your m
 ![](/screenshots/vue-inspector-07.png)
 
 
-
 ## Features
 - Works with Vue.js 2
 - Reactive (of course)
@@ -73,6 +72,10 @@ or open [this URL](http://calirojas1.000webhostapp.com/vue-inspector/demo) with 
 
 ## Compatibility
 I have tested this tool only with Android phones and tablets, and it's compatible with Google Chrome. If you have information about the compatibility with iOS, or/and other mobile browsers, please let me know.
+
+## Pending / In Progress
+- Events logging
+- Vuex support (managed state)
 
 ## Stay In Touch
 
