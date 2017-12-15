@@ -75,7 +75,7 @@ I have tested this tool only with Android phones and tablets, and it's compatibl
 
 ## Pending / In Progress
 - Events logging
-- Vuex support (managed state)
+- Vuex support (state management)
 
 ## Stay In Touch
 
