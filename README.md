@@ -1,7 +1,7 @@
 # vue-inspector
 Vue.js Inspector for Mobile Devices.
 
-![](/logo/vue-inspector.gif)
+![](/images-git/header.png)
 
 ## What is vue-inspector?
 **vue-inspector** is a basic inspector for Vue.js, focused only in mobile devices. It could work in a desktop environment, but I do not recommend that; use Vue.js devtools instead.
