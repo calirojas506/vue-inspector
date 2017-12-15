@@ -6,11 +6,19 @@ Vue.js Inspector for Mobile Devices.
 ## What is vue-inspector?
 **vue-inspector** is a basic inspector for Vue.js, focused only in mobile devices. It could work in a desktop environment, but I do not recommend that; use Vue.js devtools instead.
 
-With **vue-inspector** is possible to execute JavaScript code directly in your mobile browser and get error messages generated at run-time. Also, inspect the data and computed properties inside the components.
+With **vue-inspector** is possible to execute JavaScript code directly in your mobile browser and get error messages generated at run-time. Also, inspect the data and computed properties inside the components and the root instance.
 
-This is a (global) component created using Vue.js, so you need Vue.js in order to use it. Also, the tiny "UI" uses Bootstrap, but it's included in the CSS file. Don't worry, it's namespaced so won't affect your styles.
+![](/screenshots/vue-inspector-07.png)
 
-**vue-inspector** overrides some methods (log, error, warn, clear & info) part of the **console** object and uses **eval** to run the code entered by the user.
+
+
+## Features
+- Works with Vue.js 2
+- Reactive (of course)
+- Instance data and computed properties inspection
+- Integrated JavaScript (basic) console for code execution and messages/errors logging
+- Navigation inside components and their children (with inspection)
+- Responsive and simple UI
 
 ## How to use vue-inspector?
 Simple. Add it to your page using a script tag, add the CSS file and, finally, place the &lt;vue-inspector/&gt; component inside your code.
