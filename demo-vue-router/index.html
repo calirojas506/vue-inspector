@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>vue-inspector Demo / Vue.js Inspector for Mobile Devices</title>
+	<title>vue-inspector meets vue-router / Vue.js Inspector for Mobile Devices</title>
 	<!-- bootstrap (only for the demo) -->
 	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<!-- do not forget to include vue-inspector css file -->
@@ -19,21 +19,38 @@
 <body>
 	<div id="app" class="container-fluid">
 		<div class="row">
-			<div class="col-xs-12">
-				<demo-article :initial-counter="6"></demo-article>
+			<div class="col-xs-12 text-center">
+				<h1>vue-inspector meets vue-router</h1>
+				<p class="text-center">
+					<a href="https://github.com/calirojas506/vue-inspector">View GitHub Repository</a>
+				</p>
+				<img src="images/logo.png" class="img-responsive center-block">
 			</div>
 		</div>
-
+		<div class="row">
+			<div class="col-xs-12">
+				<main-menu/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<router-view/>
+			</div>
+		</div>
 		<!-- add the component to your view -->
 		<vue-inspector :is-visible="true" :is-expanded="true" :is-minimized="false"/>
 	</div>
 
 	<!-- scripts (vue and vue-inspector) -->
 	<script src="../node_modules/vue/dist/vue.js"></script>
+	<script src="../node_modules/vue-router/dist/vue-router.min.js"></script>
 	<script src="../dist/vue-inspector-latest.min.js"></script>
 	<!-- demo components (not part of vue-inspector / dev for this demo) -->
-	<script src="js/components/demo-article.js"></script>
-	<script src="js/components/demo-footer.js"></script>
+	<script src="js/components/menu.js"></script>
+	<script src="js/components/start-page.js"></script>
+	<script src="js/components/second-page.js"></script>
+	<script src="js/components/third-page.js"></script>
+	<script src="js/router.js"></script>
 	<script src="js/app.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /*
-	vue-inspector
+	vue-inspector v0.2 beta
 	Vue.js Inspector for Mobile Devices
 
 	Released under MIT License
@@ -112,16 +112,24 @@ Vue.component('vue-inspector', {
 											</ul>
 										</details>
 									</details>
-									<details v-for="component in filterByParent(parentFilter)" :open="isExpanded">
+									<details v-for="component in filterByParent(parentFilter)" :key="component.id" :open="isExpanded">
 										<summary>
-											&lt;{{component.tag}}&gt;
-											<div class="pull-right text-muted small"
+											&lt;{{component.tag || component.name}}&gt;
+											<div class="pull-right text-muted small cursor-pointer"
 											:class="{'cursor-pointer': parentFilter !== 0}"
 											@click.prevent.stop="displayComponent(parentFilter === 0 ? 0 : theComponents[parentFilter].parent)">
-												&lt;{{parentFilter === 0 ? 'root' : theComponents[component.parent].tag}}&gt;
+												&nbsp;&lt;{{parentFilter === 0 ? 'root' : (theComponents[component.parent].tag || theComponents[component.parent].name)}}&gt;
 											</div>
+											<span class="pull-right small label label-warning cursor-pointer" v-if="component.route && !component.isRouterLink"
+											@click.prevent.stop="displayComponent(parentFilter === 0 ? 0 : theComponents[parentFilter].parent)">
+												{{component.path}}
+											</span>
+											<span class="pull-right small label label-warning cursor-pointer" v-if="component.isRouterLink"
+											@click.prevent.stop="navigateToRoute(component.to)">
+												to: {{component.to.path || component.to.name || component.to}}
+											</span>
 										</summary>
-										<details :open="isExpanded">
+										<details :open="isExpanded" v-if="!component.isRouterLink">
 											<summary>data</summary>
 											<ul class="list-unstyled">
 												<vue-inspector-empty v-if="!isObject(component.data)" class="text-muted"/>
@@ -130,7 +138,22 @@ Vue.component('vue-inspector', {
 												</li>
 											</ul>
 										</details>
-										<details :open="isExpanded">
+										<details :open="isExpanded" v-if="!component.isRouterLink && isObject(component.route)">
+											<summary>route</summary>
+											<ul class="list-unstyled">
+												<vue-inspector-empty v-if="!isObject(component.route)" class="text-muted"/>
+												<template v-else>
+													<li>path: <code>{{component.route.path}}</code></li>
+													<li>fullPath: <code>{{component.route.fullPath}}</code></li>
+													<li>meta: <code>{{component.route.meta}}</code></li>
+													<li>params: <code>{{component.route.params}}</code></li>
+													<li>query: <code>{{component.route.query || '{}' }}</code></li>
+													<li>hash: <code>{{component.route.hash || 'undefined'}}</code></li>
+													<li>name: <code>{{component.route.name || 'undefined'}}</code></li>
+												</template>
+											</ul>
+										</details>
+										<details :open="isExpanded" v-if="!component.isRouterLink">
 											<summary>computed</summary>
 											<ul class="list-unstyled">
 											<vue-inspector-empty v-if="!isObject(component.computed)" class="text-muted"/>
@@ -148,13 +171,18 @@ Vue.component('vue-inspector', {
 												</li>
 											</ul>
 										</details>
-										<details :open="isExpanded">
-											<summary>children</summary>
+										<details :open="isExpanded" v-if="!component.isRouterLink">
+											<summary>childrens</summary>
 											<ul class="list-unstyled">
 												<vue-inspector-empty v-if="!isObject(filterByParent(component.id))" class="text-muted"/>
 												<li v-for="component in filterByParent(component.id)">
 													<a href="#" @click.prevent="displayComponent(component.parent)">
 														&lt;{{component.tag}}&gt;
+														<a href="#" v-if="component.isRouterLink"
+														@click.prevent.stop="navigateToRoute(component.to)"
+														class="pull-right small label label-warning">
+															to: {{component.to.path || component.to.name || component.to}}
+														</a>
 													</a>
 												</li>
 											</ul>
@@ -166,8 +194,10 @@ Vue.component('vue-inspector', {
 										<strong>{{componentName}}</strong>
 										v{{componentVersion}}
 										<br>
-										{{componentDescription}}.
-										<br><br>
+										{{componentDescription}}
+									</p>
+									<p><strong>Last update:</strong> {{componentLastUpdate}}</p>
+									<p>
 										<a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>
 										<br>
 										Copyright &copy; 2017,
@@ -231,7 +261,8 @@ Vue.component('vue-inspector', {
 		return {
 			componentName: 'vue-inspector',
 			componentDescription: 'Vue.js Inspector for Mobile Devices',
-			componentVersion: '0.1 beta',
+			componentVersion: '0.2 beta',
+			componentLastUpdate: 'December 16th, 2017',
 			commandInput: '',
 			logs: [],
 			instanceData: this.$root.$data,
@@ -261,6 +292,10 @@ Vue.component('vue-inspector', {
 		}
 	},
 	methods: {
+		navigateToRoute(route){
+			this.$router.push(route);
+			this.refreshComponents();
+		},
 		isObject(theObject){
 			return (theObject === undefined ? false : Object.keys(theObject).length);
 		},
@@ -283,6 +318,7 @@ Vue.component('vue-inspector', {
 			this.parentFilter = componentId;
 		},
 		refreshComponents(){
+			this.parentFilter = 0;
 			this.theComponents = {};
 			this.loadComponentsData();
 		},
@@ -309,7 +345,13 @@ Vue.component('vue-inspector', {
 					result[componentId] = {};
 					result[componentId].id = component._uid;
 					result[componentId].data = component._data;
+					result[componentId].isRouterLink = componentOptions._componentTag === 'router-link';
+					result[componentId].to =  result[componentId].isRouterLink ? component.to : '';
+
 					result[componentId].tag = componentOptions._componentTag;
+					result[componentId].name = componentOptions.name || 'anonymous';
+					result[componentId].route = component.$route;
+					result[componentId].path = result[componentId].route ? component.$route.path : '';
 					result[componentId].props = {};
 					result[componentId].parent = component.$parent._uid;
 
@@ -333,6 +375,23 @@ Vue.component('vue-inspector', {
 						this.loadComponentsData(component.$children);
 					}
 				}
+			}
+		},
+		getRouterPath(value){
+			alert(value)
+
+			if(value){
+				if(value.to){
+					if(value.to.path){
+						return value.to.path;
+					}else{
+						return value.to;
+					}
+				}else{
+					return value + ' esto';
+				}
+			}else{
+				return '';
 			}
 		},
 		togglePanels(){
@@ -432,5 +491,10 @@ Vue.component('vue-inspector', {
 	created(){
 		this.loadComponentsData();
 		this.init();
+	},
+	watch: {
+		'$route'(){
+			this.refreshComponents();
+		}
 	}
 });

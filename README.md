@@ -66,16 +66,31 @@ This script is intended only for browsers, running on Mobile Devices, that lacks
 ![](/screenshots/vue-inspector-05.jpg)
 ![](/screenshots/vue-inspector-06.jpg)
 
-## Demo
-Download or clone this repo and open the **demo** folder,
-or open [this URL](http://calirojas1.000webhostapp.com/vue-inspector/demo) with your mobile device.
+## Demos
+Download or clone this repo and open **demo** and **demo-vue-router** folders, or open the following links using your mobile browser:
+- [Simple demo](http://calirojas1.000webhostapp.com/vue-inspector/demo)
+- [vue-router demo](http://calirojas1.000webhostapp.com/vue-inspector/demo-vue-router)
+
 
 ## Compatibility
-I have tested this tool only with Android phones and tablets, and it's compatible with Google Chrome. If you have information about the compatibility with iOS, or/and other mobile browsers, please let me know.
+I have tested this tool only with Android phones and tablets. If you have information about the compatibility with iOS, or/and other mobile browsers, please let me know to update this list. I will appreciate any collaboration with compatibility testing. Currently tested/compatible with:
+
+- Firefox for Android
+- Google Chrome for Android
 
 ## Pending / In Progress
 - Events logging
 - Vuex support (state management)
+- ~~Support for vue-router~~ _(Added)_
+
+## Changelog
+- **December 16th 2017:**
+    - **vue-inspector**, beta 0.2 released.
+    - Added support for vue-router.
+    - New demo created/added, using vue-router to demonstrate how the integration works.
+    - Tested in Mozilla Firefox for Android. It works :)
+- **December 14th, 2017**
+  - **vue-inspector**, beta 0.1 released.
 
 ## Stay In Touch
 
