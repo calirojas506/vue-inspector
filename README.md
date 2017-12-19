@@ -70,6 +70,7 @@ This script is intended only for browsers, running on Mobile Devices, that lacks
 Download or clone this repo and open **demo** and **demo-vue-router** folders, or open the following links using your mobile browser:
 - [Simple demo](http://calirojas1.000webhostapp.com/vue-inspector/demo)
 - [vue-router demo](http://calirojas1.000webhostapp.com/vue-inspector/demo-vue-router)
+- webpack demo (download from repo)
 
 
 ## Compatibility
