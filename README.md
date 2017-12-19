@@ -84,6 +84,8 @@ I have tested this tool only with Android phones and tablets. If you have inform
 - ~~Support for vue-router~~ _(Added)_
 
 ## Changelog
+- **December 19th, 2017**
+  - New demo added for webpack integration.
 - **December 16th, 2017**
     - **vue-inspector**, beta 0.2 released.
     - Added support for vue-router.
