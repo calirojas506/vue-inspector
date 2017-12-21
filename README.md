@@ -46,6 +46,11 @@ This file basically contains a copy of Bootstrap namespaced and some styles rela
 ```
 Make sure **vue-inspector** is the last component added.
 
+## Install vue-inspector from npm
+```shell
+npm install --save-dev vue-inspector
+```
+
 ## Properties
 The following properties are available:
 
