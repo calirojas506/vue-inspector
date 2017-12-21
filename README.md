@@ -48,7 +48,7 @@ This file basically contains a copy of Bootstrap namespaced and some styles rela
 ```
 Make sure **vue-inspector** is the last component added.
 
-## Install vue-inspector from npm
+## Install vue-inspector via Yarn or Yarn
 Installing with npm:
 
 ```shell
@@ -56,6 +56,12 @@ npm install --save-dev vue-inspector
 ```
 
 [![NPM](https://nodei.co/npm/vue-inspector.png?mini=true)](https://npmjs.org/package/vue-inspector)
+
+Using Yarn:
+```shell
+yarn add --dev vue-inspector
+```
+
 
 ## Properties
 The following properties are available:
