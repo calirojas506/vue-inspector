@@ -92,7 +92,7 @@ I have tested this tool only with Android phones and tablets. If you have inform
 - Vuex support (state management)
 - ~~Component rewrite~~ _(Done)_
 - ~~Support for vue-router~~ _(Done)_
-- Publish npm module
+- ~~Publish npm module~~ _(Done)_
 - Update screenshots
 - Add CDN
 
