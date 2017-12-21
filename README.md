@@ -6,6 +6,8 @@ Vue.js Inspector for Mobile Devices
 ![](/images/header.png)
 
 ## What is vue-inspector?
+[![NPM](https://nodei.co/npm/vue-inspector.png?compact=true)](https://npmjs.org/package/vue-inspector)
+
 **vue-inspector** is a basic inspector for Vue.js that works with mobile devices. It could work in a desktop environment, but I do not recommend that; use **Vue.js devtools** instead.
 
 With **vue-inspector** is possible to execute JavaScript code directly in your mobile browser and get error messages generated at run-time. Also inspect the data, props, router links, views/components, computed properties, routes and more... inside your Vue.js project.
@@ -47,6 +49,7 @@ This file basically contains a copy of Bootstrap namespaced and some styles rela
 Make sure **vue-inspector** is the last component added.
 
 ## Install vue-inspector from npm
+
 ```shell
 npm install --save-dev vue-inspector
 ```
