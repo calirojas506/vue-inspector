@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>vue-inspector Demo / Vue.js Inspector for Mobile Devices</title>
+	<!-- bootstrap (only for the demo) -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- do not forget to include vue-inspector css file -->
+	<link rel="stylesheet" href="../../dist/css/vue-inspector.min.css">
+	<!-- sorry :P -->
+	<style type="text/css">
+		body{
+			margin-bottom: 500px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app" class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<demo-article :initial-counter="6"></demo-article>
+			</div>
+		</div>
+		<vue-inspector :is-visible="true" :is-minimized="false"/>
+		<!-- add the component to your view -->
+	</div>
+
+	<!-- scripts (vue and vue-inspector) -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+	<script src="../../dist/js/vue-inspector.min.js"></script>
+	<!-- demo components (not part of vue-inspector / dev for this demo) -->
+	<script src="js/components/demo-article.js"></script>
+	<script src="js/components/demo-footer.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>

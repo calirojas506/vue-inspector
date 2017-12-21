@@ -1,6 +1,26 @@
 .vue-inspector{
-	@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+	$vue-primary-color: #35495E;
+	$vue-secondary-color: #41b883;
 
+	$icon-font-path: "~/fonts/bootstrap/";
+	@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+
+	::-webkit-scrollbar{
+		width: 5px;
+		background: transparent;
+		opacity: .4;
+		height: 5px;
+	}
+
+	::-webkit-scrollbar-thumb{
+		background-color: rgba($vue-primary-color, 1);
+
+		&:hover{
+			background-color: rgba($vue-primary-color, 1);
+		}
+	}
+
+	text-align: left;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.428571429;
@@ -37,7 +57,7 @@
 		.panel-sizes{
 		}
 
-		overflow-x: hidden;
+		overflow-x: auto;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 		// max-height: 250px;
@@ -61,11 +81,23 @@
 						padding-left: 30px;
 					}
 				}
+
+				&:empty{
+
+					&:after{
+						content: 'empty';
+						@extend .label;
+						@extend .label-default;
+						display: inline-block;
+						border-radius: 0;
+					}
+				}
 			}
 
 			summary{
 				outline: 0;
 				font-weight: bold;
+				cursor: pointer;
 			}
 
 			details{
@@ -156,5 +188,13 @@
 
 	.cursor-pointer{
 		cursor: pointer;
+	}
+
+	code{
+		word-break: break-all;
+	}
+
+	.label.pull-right {
+		display: inline-table;
 	}
 }
