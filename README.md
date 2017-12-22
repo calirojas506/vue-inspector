@@ -12,7 +12,7 @@ Vue.js Inspector for Mobile Devices
 
 With **vue-inspector** is possible to execute JavaScript code directly in your mobile browser and get error messages generated at run-time. Also inspect the data, props, router links, views/components, computed properties, routes and more... inside your Vue.js project.
 
-![](/images/screenshots/vue-inspector-07.png)
+![](/images/screenshots/desktop/vue-inspector-01.png)
 
 
 ## Features
@@ -23,30 +23,6 @@ With **vue-inspector** is possible to execute JavaScript code directly in your m
 - Navigation inside components and their children (with inspection)
 - Responsive and simple UI
 - Supports vue-router
-
-<!-- ## How to use vue-inspector?
-Copy the **dist** folder to your project, and link the CSS and JavaScript files to your HTML. Last step is adding the **&lt;vue-inspector/&gt;** component inside your app wrapper (**el**).
-
-```html
-add vue-inspector
-<script src="vue-inspector/dist/js/vue-inspector.min.js"></script>
-```
-The script should be added before creating the instance. Remember this is a global component. So that's the Vue.js way.
-
-```html
-<link rel="stylesheet" href="vue-inspector/dist/css/vue-inspector.min.css">
-```
-This file basically contains a copy of Bootstrap namespaced and some styles related to the UI. This styles won't affect yours.
-
-```html
-<div id="app">
-  add the component to your view
-  <vue-inspector
-    :is-visible="true"
-    :is-minized="false"/>
-</div>
-```
-Make sure **vue-inspector** is the last component added. -->
 
 ## Installing vue-inspector via Yarn or npm
 Installing with npm:
@@ -61,6 +37,21 @@ Using Yarn:
 ```shell
 yarn add --dev vue-inspector
 ```
+
+## How to use vue-inspector?
+Install using npm or Yarn, then add **vue-inspector** (CSS and JavaScript files) to your project. Last step is adding the **&lt;vue-inspector/&gt;** component inside your app wrapper (**el**).
+
+```html
+<div id="app">
+  <!-- add the component to your view -->
+  <vue-inspector
+    :is-visible="true"
+    :is-minimized="false"/>
+</div>
+```
+Make sure **vue-inspector** is the last component added.
+
+If you're having issues with the installation, please see any of the available demos in this repository. Currently **vue-inspector** does not support Nuxt, but I'm working on it :)
 
 
 ## Properties
@@ -78,12 +69,18 @@ Use **vue-inspector** only in development mode. Do not forget to remove the scri
 This script is intended only for browsers running on Mobile Devices, that lacks of JavaScript console.
 
 ## Screenshots
-![](/images/screenshots/vue-inspector-01.jpg)
-![](/images/screenshots/vue-inspector-02.jpg)
-![](/images/screenshots/vue-inspector-03.jpg)
-![](/images/screenshots/vue-inspector-04.jpg)
-![](/images/screenshots/vue-inspector-05.jpg)
-![](/images/screenshots/vue-inspector-06.jpg)
+![](/images/screenshots/mobile/simple/vue-inspector-01.png)
+![](/images/screenshots/mobile/simple/vue-inspector-02.png)
+![](/images/screenshots/mobile/simple/vue-inspector-03.png)
+![](/images/screenshots/mobile/simple/vue-inspector-04.png)
+![](/images/screenshots/mobile/simple/vue-inspector-05.png)
+
+## vue-router
+![](/images/screenshots/mobile/router/vue-inspector-router-00.png)
+![](/images/screenshots/mobile/router/vue-inspector-router-01.png)
+![](/images/screenshots/mobile/router/vue-inspector-router-02.png)
+![](/images/screenshots/mobile/router/vue-inspector-router-03.png)
+![](/images/screenshots/mobile/router/vue-inspector-router-04.png)
 
 ## Demos
 Download or clone this repo and open the folder **demos**, or open the following links using your mobile browser:
@@ -100,12 +97,12 @@ I have tested this tool only with Android phones and tablets. If you have inform
 ## Pending / In Progress
 - Events logging
 - Vuex support (state management) _(In progress)_
+- Support for Nuxt _(In progress)_
+- Add CDN _(the project needs at least 200 stars on GitHub)_
 - ~~Component rewrite~~ _(Done)_
 - ~~Support for vue-router~~ _(Done)_
-- Support for Nuxt _(In progress)_
 - ~~Publish npm module~~ _(Done)_
-- Update screenshots
-- Add CDN _(the project needs at least 200 stars on GitHub)_
+- ~~Update screenshots to version 0.3.1~~ _(Done)_
 
 ## Changelog
 - **December 22th, 2017**
@@ -113,6 +110,7 @@ I have tested this tool only with Android phones and tablets. If you have inform
   - Fixed issue with Vuex
   - Version 0.3.1 released
   - npm package updated to 0.3.1 _(please, update your vue-inspector version)_
+  - Screenshots updated to 0.3.1
 - **December 21th, 2017**
   - UI updates
   - Component rewrite
