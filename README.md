@@ -139,7 +139,5 @@ I have tested this tool only with Android phones and tablets. If you have inform
 ## License
 [MIT](http://opensource.org/licenses/MIT)
 
-[![HitCount](http://hits.dwyl.io/calirojas506/vue-inspector.svg)](http://hits.dwyl.io/calirojas506/vue-inspector)
-
 
 Copyright (c) 2017, Cali Rojas
