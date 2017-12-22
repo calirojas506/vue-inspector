@@ -1,5 +1,5 @@
 # vue-inspector 0.3.1
-<!-- _Last update: December 22th, 2017_ -->
+_Last update: December 22th, 2017_
 
 Vue.js Inspector for Mobile Devices
 
@@ -69,7 +69,6 @@ The following properties are available:
 |Property|Required|Default value|Description|
 |--------|--------|-------------|-----------|
 |is-visible|false|true|Start visible|
-|~~is-expanded~~|~~false~~|~~true~~|~~Expand all the nodes automatically~~ **Removed**|
 |is-minimized|false|true|Start minimized|
 
 
@@ -98,15 +97,15 @@ I have tested this tool only with Android phones and tablets. If you have inform
 - Firefox for Android
 - Google Chrome for Android
 
-<!-- ## Pending / In Progress
+## Pending / In Progress
 - Events logging
 - Vuex support (state management) _(In progress)_
 - ~~Component rewrite~~ _(Done)_
 - ~~Support for vue-router~~ _(Done)_
-- Support for Nuxt
+- Support for Nuxt _(In progress)_
 - ~~Publish npm module~~ _(Done)_
 - Update screenshots
-- Add CDN _(the project needs at least 200 stars on GitHub)_ -->
+- Add CDN _(the project needs at least 200 stars on GitHub)_
 
 ## Changelog
 - **December 22th, 2017**
