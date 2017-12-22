@@ -62,20 +62,12 @@ The following properties are available:
 |is-visible|false|true|Start visible|
 |is-minimized|false|true|Start minimized|
 
-
-## Important
-Use **vue-inspector** only in development mode. Do not forget to remove the script and style files before sending to production.
-
-This script is intended only for browsers running on Mobile Devices, that lacks of JavaScript console.
-
 ## Screenshots
 ![](/images/screenshots/mobile/simple/vue-inspector-01.png)
 ![](/images/screenshots/mobile/simple/vue-inspector-02.png)
 ![](/images/screenshots/mobile/simple/vue-inspector-03.png)
 ![](/images/screenshots/mobile/simple/vue-inspector-04.png)
 ![](/images/screenshots/mobile/simple/vue-inspector-05.png)
-
-## vue-router
 ![](/images/screenshots/mobile/router/vue-inspector-router-00.png)
 ![](/images/screenshots/mobile/router/vue-inspector-router-01.png)
 ![](/images/screenshots/mobile/router/vue-inspector-router-02.png)
