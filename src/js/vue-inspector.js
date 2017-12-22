@@ -1,5 +1,5 @@
 /*
-  vue-inspector v0.3.0
+  vue-inspector v0.3.1
   Vue.js Inspector for Mobile Devices
 
   Released under MIT License
@@ -100,7 +100,7 @@ Vue.component('vue-inspector', {
                     <a href="#" @click.prevent.stop="refresh">&olarr;</a>
                   </li>
                   <li class="pull-right vue-inspector__header-back"
-                  v-show="panel.activeTab === 1 && parentFilter !== 0">
+                  v-show="panel.activeTab === 1 && parentFilter !== rootInstance._uid">
                     <a href="#" @click.prevent.stop="displayComponent(activeComponent.$parent._uid)">&lt;</a>
                   </li>
                   <li class="pull-right vue-inspector__header-clear"
@@ -112,47 +112,63 @@ Vue.component('vue-inspector', {
               <div class="panel-body panel-content smalls" v-show="!panel.minimized"
               :style="{'height': panel.height + 'px', 'min-height': panel.minHeight + 'px'}">
                 <div v-show="panel.activeTab === 1 && panel.minimized == false">
-                  <details v-if="rootInstance.$route">
-                    <summary>$route</summary>
-                    <ul>
-                      <li>
-                        path:
-                        <code>{{rootInstance.$route.path}}</code>
-                        <span class="label label-default pull-right">{{typeof(rootInstance.$route.path)}}</span>
-                      </li>
-                      <li>
-                        fullPath:
-                        <code>{{rootInstance.$route.fullPath}}</code>
-                        <span class="label label-default pull-right">{{typeof(rootInstance.$route.fullPath)}}</span>
-                      </li>
-                      <li>
-                        meta:
-                        <code>{{rootInstance.$route.meta}}</code>
-                        <span class="label label-default pull-right">{{typeof(rootInstance.$route.meta)}}</span>
-                      </li>
-                      <li>
-                        params:
-                        <code>{{rootInstance.$route.params}}</code>
-                        <span class="label label-default pull-right">{{typeof(rootInstance.$route.params)}}</span>
-                      </li>
-                      <li>
-                        query:
-                        <code>{{rootInstance.$route.query || '{}' }}</code>
-                        <span class="label label-default pull-right">{{typeof(rootInstance.$route.query)}}</span>
-                      </li>
-                      <li>
-                        hash:
-                        <code>{{rootInstance.$route.hash || 'undefined'}}</code>
-                        <span class="label label-default pull-right">{{typeof(rootInstance.$route.hash)}}</span>
-                      </li>
-                      <li>
-                        name:
-                        <code>{{rootInstance.$route.name || 'undefined'}}</code>
-                        <span class="label label-default pull-right">{{typeof(rootInstance.$route.name)}}</span>
-                      </li>
+                  <details v-if="rootInstance.$router">
+                    <summary>&lt;router&gt;</summary>
+                    <ul class="list-unstyled">
+                      <li>mode: <code>{{rootInstance.$router.mode}}</code></li>
                     </ul>
+                    <details>
+                      <summary>routes</summary>
+                      <ul class="list-unstyled">
+                        <li v-for="route in rootInstance.$router.options.routes">
+                          <router-link :to="route.path">{{route.path}}</router-link>
+                          <router-link :to="route.path" class="label label-warning pull-right">
+                            &lt;{{route.component.name || 'anonymous'}}&gt;
+                          </router-link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>current route</summary>
+                      <ul class="list-unstyled">
+                        <li>
+                          path:
+                          <code>{{JSON.stringify(rootInstance.$route.path) || typeof(rootInstance.$route.path)}}</code>
+                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.path)}}</span>
+                        </li>
+                        <li>
+                          fullPath:
+                          <code>{{JSON.stringify(rootInstance.$route.fullPath) || typeof(rootInstance.$route.fullPath)}}</code>
+                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.fullPath)}}</span>
+                        </li>
+                        <li>
+                          meta:
+                          <code>{{JSON.stringify(rootInstance.$route.meta) || typeof(rootInstance.$route.meta)}}</code>
+                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.meta)}}</span>
+                        </li>
+                        <li>
+                          params:
+                          <code>{{JSON.stringify(rootInstance.$route.params) || typeof(rootInstance.$route.params)}}</code>
+                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.params)}}</span>
+                        </li>
+                        <li>
+                          query:
+                          <code>{{JSON.stringify(rootInstance.$route.query) || typeof(rootInstance.$route.query) }}</code>
+                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.query)}}</span>
+                        </li>
+                        <li>
+                          hash:
+                          <code>{{JSON.stringify(rootInstance.$route.hash) || typeof(rootInstance.$route.hash)}}</code>
+                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.hash)}}</span>
+                        </li>
+                        <li>
+                          name:
+                          <code>{{JSON.stringify(rootInstance.$route.name) || typeof(rootInstance.$route.name)}}</code>
+                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.name)}}</span>
+                        </li>
+                      </ul>
+                    </details>
                   </details>
-                  <p v-else class="small text-muted">$route not detected</p>
                   <details open>
                     <summary>&lt;{{
                         (
@@ -171,7 +187,7 @@ Vue.component('vue-inspector', {
                         &lt;{{
                           activeComponent.$parent.$options._componentTag ||
                           activeComponent.$parent.$options.name ||
-                          (activeComponent.$parent._uid == 0 ? 'root' : 'anonymous')
+                          (activeComponent.$parent._uid == rootInstance._uid ? 'root' : 'anonymous')
                         }}&gt;
                       </a>
                     </summary>
@@ -235,7 +251,7 @@ Vue.component('vue-inspector', {
 
                 <div class="panel-sizes">
                   <hr>
-                  <div class="pull-left" v-if="parentFilter !== 0 && panel.activeTab === 1">
+                  <div class="pull-left" v-if="parentFilter !== rootInstance._uid && panel.activeTab === 1">
                     <div>
                       <button type="button" class="btn btn-md btn-empty text-muted"
                       @click.prevent.stop="displayComponent(activeComponent.$parent._uid)">
@@ -298,8 +314,8 @@ Vue.component('vue-inspector', {
       thisComponent: {
         name: 'vue-inspector',
         description: 'Vue.js Inspector for Mobile Devices',
-        version: '0.3.0',
-        lastUpdate: 'December 21th, 2017',
+        version: '0.3.1',
+        lastUpdate: 'December 22th, 2017',
         author: {
           name: 'Cali Rojas',
           email: 'calirojas@outlook.com',
@@ -318,6 +334,9 @@ Vue.component('vue-inspector', {
     }
   },
   methods: {
+    reaalTypeOf (theObject) {
+        return ({}).toString.call(theObject).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+    },
     displayComponent (componentId) {
       this.filteredComponents = {}
       this.parentFilter = componentId
@@ -439,7 +458,7 @@ Vue.component('vue-inspector', {
       this.selectCommandInput()
     },
     refresh () {
-      this.parentFilter = 0
+      this.parentFilter = this.rootInstance._uid
       this.filteredComponents = {}
       this.loadComponent(this.rootInstance)
     }

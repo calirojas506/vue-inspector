@@ -24,5 +24,8 @@
   "homepage": "https://github.com/calirojas506/vue-inspector#readme",
   "devDependencies": {
     "bootstrap-sass": "^3.3.7"
+  },
+  "dependencies": {
+    "vue": "^2.5.13"
   }
 }

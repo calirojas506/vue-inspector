@@ -1,5 +1,5 @@
-# vue-inspector 0.3.0
-_Last update: December 21th, 2017_
+# vue-inspector 0.3.1
+<!-- _Last update: December 22th, 2017_ -->
 
 Vue.js Inspector for Mobile Devices
 
@@ -24,11 +24,11 @@ With **vue-inspector** is possible to execute JavaScript code directly in your m
 - Responsive and simple UI
 - Supports vue-router
 
-## How to use vue-inspector?
+<!-- ## How to use vue-inspector?
 Copy the **dist** folder to your project, and link the CSS and JavaScript files to your HTML. Last step is adding the **&lt;vue-inspector/&gt;** component inside your app wrapper (**el**).
 
 ```html
-<!-- add vue-inspector -->
+add vue-inspector
 <script src="vue-inspector/dist/js/vue-inspector.min.js"></script>
 ```
 The script should be added before creating the instance. Remember this is a global component. So that's the Vue.js way.
@@ -40,13 +40,13 @@ This file basically contains a copy of Bootstrap namespaced and some styles rela
 
 ```html
 <div id="app">
-  <!-- add the component to your view -->
+  add the component to your view
   <vue-inspector
     :is-visible="true"
     :is-minized="false"/>
 </div>
 ```
-Make sure **vue-inspector** is the last component added.
+Make sure **vue-inspector** is the last component added. -->
 
 ## Installing vue-inspector via Yarn or npm
 Installing with npm:
@@ -92,23 +92,28 @@ Download or clone this repo and open the folder **demos**, or open the following
 - [vue-router demo](http://calirojas1.000webhostapp.com/vue-inspector/demos/vue-router)
 - webpack demo (download the project)
 
-
 ## Compatibility
 I have tested this tool only with Android phones and tablets. If you have information about the compatibility with iOS, or/and other mobile browsers, please let me know to update this list. I will appreciate any collaboration with compatibility testing. Currently tested/compatible with:
 
 - Firefox for Android
 - Google Chrome for Android
 
-## Pending / In Progress
+<!-- ## Pending / In Progress
 - Events logging
-- Vuex support (state management)
+- Vuex support (state management) _(In progress)_
 - ~~Component rewrite~~ _(Done)_
 - ~~Support for vue-router~~ _(Done)_
+- Support for Nuxt
 - ~~Publish npm module~~ _(Done)_
 - Update screenshots
-- Add CDN
+- Add CDN _(the project needs at least 200 stars on GitHub)_ -->
 
 ## Changelog
+- **December 22th, 2017**
+  - Improved support for vue-router
+  - Fixed issue with Vuex
+  - Version 0.3.1 released
+  - npm package updated to 0.3.1 _(please, update your vue-inspector version)_
 - **December 21th, 2017**
   - UI updates
   - Component rewrite
