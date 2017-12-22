@@ -90,7 +90,8 @@ I have tested this tool only with Android phones and tablets. If you have inform
 - Events logging
 - Vuex support (state management) _(In progress)_
 - Support for Nuxt _(In progress)_
-- Add CDN _(the project needs at least 200 stars on GitHub)_
+- Improve variable type detection _(In progress)_
+- Add CDN **(the project needs at least 200 stars on GitHub)** _(In progress?)_
 - ~~Component rewrite~~ _(Done)_
 - ~~Support for vue-router~~ _(Done)_
 - ~~Publish npm module~~ _(Done)_
