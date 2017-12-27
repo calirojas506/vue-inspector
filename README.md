@@ -41,12 +41,12 @@ yarn add --dev vue-inspector
 
 JavaScript:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vue-inspector@0.3.1/dist/js/vue-inspector.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.0/dist/js/vue-inspector.min.js"></script>
 ```
 
 CSS:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-inspector@0.3.1/dist/css/vue-inspector.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.0/dist/css/vue-inspector.min.css">
 ```
 ## How to use vue-inspector?
 Install using npm or Yarn, then add **vue-inspector** _(CSS and JavaScript files)_ to your project. Last step is adding the **&lt;vue-inspector/&gt;** component inside your app wrapper _(**el**)_.
