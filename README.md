@@ -1,4 +1,4 @@
-# vue-inspector 0.4.1
+# vue-inspector 0.4.2
 Vue.js Inspector for Mobile Devices
 
 
