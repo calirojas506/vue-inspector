@@ -427,7 +427,7 @@ Vue.component('vue-inspector', {
         name: 'vue-inspector',
         description: 'Vue.js Inspector for Mobile Devices',
         version: '0.4.0',
-        lastUpdate: 'December 22th, 2017',
+        lastUpdate: 'December 26th, 2017',
         author: {
           name: 'Cali Rojas',
           email: 'calirojas@outlook.com',

@@ -1,4 +1,4 @@
-# vue-inspector 0.4.0
+# vue-inspector 0.4.1
 Vue.js Inspector for Mobile Devices
 
 
@@ -41,12 +41,12 @@ yarn add --dev vue-inspector
 
 JavaScript:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.0/dist/js/vue-inspector.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.1/dist/js/vue-inspector.min.js"></script>
 ```
 
 CSS:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.0/dist/css/vue-inspector.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.1/dist/css/vue-inspector.min.css">
 ```
 ## How to use vue-inspector?
 Install using npm or Yarn, then add **vue-inspector** _(CSS and JavaScript files)_ to your project. Last step is adding the **&lt;vue-inspector/&gt;** component inside your app wrapper _(**el**)_.
@@ -110,7 +110,7 @@ I have tested this tool only with Android phones and tablets. If you have inform
 - Support for Nuxt _(In progress)_
 
 ## Changelog
-- **December 27th, 2017**
+- **December 26th, 2017**
   - Improved variable type detection
   - **Console** tab removed _(now appears at the bottom)_
   - Basic support for Vuex added _(new tab Vuex)_
@@ -121,9 +121,10 @@ I have tested this tool only with Android phones and tablets. If you have inform
   - New props added: hide-lines, hide-vuex, hide-components, hide-router
   - Optional separator lines to improve readability in devices with small screens _(prop **hide-lines**, by default = false)_
   - New webpack demo using Vuex
-  - Screenshots updated to 0.4.0
   - npm package released, version 0.4.0
   - jsDelivr CDN added
+  - Fixed small issue with "lastUpdate" property (patched to 0.4.1)
+  - Released version 0.4.1
 - **December 22th, 2017**
   - Improved support for vue-router
   - Fixed issue with Vuex
