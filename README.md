@@ -77,18 +77,21 @@ If you hide any of the tabs _(Components, Vuex or Router)_ the console will be s
 
 
 ## Screenshots
-**Important:** these screenshots are not updated. Check the demos, so you can see the latest version running ;)
+**Important:** sometimes these screenshots are not updated. Check the demos, so you can see the latest version running ;)
 
-![](/images/screenshots/mobile/simple/vue-inspector-01.png)
-![](/images/screenshots/mobile/simple/vue-inspector-02.png)
-![](/images/screenshots/mobile/simple/vue-inspector-03.png)
-![](/images/screenshots/mobile/simple/vue-inspector-04.png)
-![](/images/screenshots/mobile/simple/vue-inspector-05.png)
-![](/images/screenshots/mobile/router/vue-inspector-router-00.png)
-![](/images/screenshots/mobile/router/vue-inspector-router-01.png)
-![](/images/screenshots/mobile/router/vue-inspector-router-02.png)
-![](/images/screenshots/mobile/router/vue-inspector-router-03.png)
-![](/images/screenshots/mobile/router/vue-inspector-router-04.png)
+![](/images/screenshots/mobile/01.png)
+![](/images/screenshots/mobile/02.png)
+![](/images/screenshots/mobile/03.png)
+![](/images/screenshots/mobile/04.png)
+![](/images/screenshots/mobile/05.png)
+![](/images/screenshots/mobile/06.png)
+![](/images/screenshots/mobile/07.png)
+![](/images/screenshots/mobile/08.png)
+![](/images/screenshots/mobile/09.png)
+![](/images/screenshots/mobile/10.png)
+![](/images/screenshots/mobile/11.png)
+![](/images/screenshots/mobile/12.png)
+
 
 ## Demos
 All the demos are available for download from this repository. Clone the repository or download the folder **demos**. Also, I've uploaded them to a temporary free hosting account which you can access with your mobile device:
