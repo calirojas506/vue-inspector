@@ -100,7 +100,7 @@ All the demos are available for download from this repository. Clone the reposit
 - [webpack demo](http://calirojas1.000webhostapp.com/vue-inspector/demos/webpack)
 - [webpack + Vuex demo](http://calirojas1.000webhostapp.com/vue-inspector/demos/webpack-vuex)
 
-**webpack users:** the property **assetsPublicPath** _(in config/index.js)_ were changed to '/vue-inspector/demos/webpack-vuex/'. Only for build. It's because I'm deploying the demo to a different directory instead server's root.
+**webpack users:** the property **assetsPublicPath** _(in config/index.js)_ was changed to '/vue-inspector/demos/webpack[-vuex]/'. Only for build. It's because I'm deploying the demo to a different directory instead server's root.
 
 
 ## Compatibility
