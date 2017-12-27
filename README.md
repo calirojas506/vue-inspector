@@ -108,6 +108,9 @@ I have tested this tool only with Android phones and tablets. If you have inform
 
 - Firefox for Android
 - Google Chrome for Android
+- Works in desktop
+
+![](/images/screenshots/desktop/vue-inspector-02.png)
 
 ## Pending / In Progress
 - Events logging
