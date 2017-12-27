@@ -77,6 +77,8 @@ If you hide any of the tabs _(Components, Vuex or Router)_ the console will be s
 
 
 ## Screenshots
+**Important:** these screenshots are not updated. Check the demos, so you can see the latest version running ;)
+
 ![](/images/screenshots/mobile/simple/vue-inspector-01.png)
 ![](/images/screenshots/mobile/simple/vue-inspector-02.png)
 ![](/images/screenshots/mobile/simple/vue-inspector-03.png)
