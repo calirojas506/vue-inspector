@@ -1,6 +1,6 @@
 {
   "name": "vue-inspector",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Vue.js Inspector for Mobile Devices",
   "main": "index.js",
   "scripts": {
