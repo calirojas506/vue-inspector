@@ -123,8 +123,8 @@ I have tested this tool only with Android phones and tablets. If you have inform
   - New webpack demo using Vuex
   - npm package released, version 0.4.0
   - jsDelivr CDN added
-  - Fixed small issue with "lastUpdate" property (patched to 0.4.1)
-  - Released version 0.4.1
+  - Fixed small issue with "lastUpdate" property (patched to 0.4.1 / 0.4.2)
+  - Released version 0.4.2
 - **December 22th, 2017**
   - Improved support for vue-router
   - Fixed issue with Vuex
