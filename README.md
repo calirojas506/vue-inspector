@@ -1,7 +1,6 @@
-# vue-inspector 0.3.1
-_Last update: December 22th, 2017_
-
+# vue-inspector 0.4.0
 Vue.js Inspector for Mobile Devices
+
 
 ![](/images/header.png)
 
@@ -10,17 +9,17 @@ Vue.js Inspector for Mobile Devices
 
 **vue-inspector** is a basic inspector for Vue.js that works with mobile devices. It could work in a desktop environment, but I do not recommend that; use **Vue.js devtools** instead.
 
-With **vue-inspector** is possible to execute JavaScript code directly in your mobile browser and get error messages generated at run-time. Also inspect the data, props, router links, views/components, computed properties, routes and more... inside your Vue.js project.
+With **vue-inspector** is possible to execute JavaScript code directly in your mobile browser and get error messages generated at run-time. Also inspect the data, props, router links, views/components, computed properties, routes, Vuex and more... inside your Vue.js project.
 
 ![](/images/screenshots/desktop/vue-inspector-01.png)
 
 
 ## Features
 - Works with Vue.js 2
-- Reactive (of course)
+- Reactive _(of course)_
 - Instance routes, data and computed properties inspection
-- Integrated JavaScript (basic) console for code execution and messages/errors logging
-- Navigation inside components and their children (with inspection)
+- Integrated JavaScript _(basic)_ console for code execution and messages/errors logging
+- Navigation inside components and their children _(with inspection)_
 - Responsive and simple UI
 - Supports vue-router
 
@@ -38,29 +37,44 @@ Using Yarn:
 yarn add --dev vue-inspector
 ```
 
+## Using vue-inspector from jsDelivr CDN
+
+JavaScript:
+```html
+<script src="https://cdn.jsdelivr.net/npm/vue-inspector@0.3.1/dist/js/vue-inspector.min.js"></script>
+```
+
+CSS:
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-inspector@0.3.1/dist/css/vue-inspector.min.css">
+```
 ## How to use vue-inspector?
-Install using npm or Yarn, then add **vue-inspector** (CSS and JavaScript files) to your project. Last step is adding the **&lt;vue-inspector/&gt;** component inside your app wrapper (**el**).
+Install using npm or Yarn, then add **vue-inspector** _(CSS and JavaScript files)_ to your project. Last step is adding the **&lt;vue-inspector/&gt;** component inside your app wrapper _(**el**)_.
 
 ```html
 <div id="app">
   <!-- add the component to your view -->
-  <vue-inspector
-    :is-visible="true"
-    :is-minimized="false"/>
+  <vue-inspector :hide-lines="true"/>
 </div>
 ```
 Make sure **vue-inspector** is the last component added.
 
 If you're having issues with the installation, please see any of the available demos in this repository. Currently **vue-inspector** does not support Nuxt, but I'm working on it :)
 
-
 ## Properties
-The following properties are available:
+The following properties are available _(all of them are Boolean and optional)_:
 
-|Property|Required|Default value|Description|
-|--------|--------|-------------|-----------|
-|is-visible|false|true|Start visible|
-|is-minimized|false|true|Start minimized|
+|Property|Type|Required|Default value|Description|
+|--------|----|--------|-------------|-----------|
+|is-visible|Boolean|false|true|Start visible|
+|is-minimized|Boolean|false|false|Start minimized|
+|hide-vuex|Boolean|false|false|Hide **Vuex** tab from UI|
+|hide-components|Boolean|false|false|Hide **Components** tab from UI|
+|hide-router|Boolean|false|false|Hide **Router** tab from UI|
+|hide-lines|Boolean|false|false|Hide separator lines _(keeping this option in false improves readability)_|
+
+If you hide any of the tabs _(Components, Vuex or Router)_ the console will be shown by default. The console can not be hidden or disabled.
+
 
 ## Screenshots
 ![](/images/screenshots/mobile/simple/vue-inspector-01.png)
@@ -75,10 +89,14 @@ The following properties are available:
 ![](/images/screenshots/mobile/router/vue-inspector-router-04.png)
 
 ## Demos
-Download or clone this repo and open the folder **demos**, or open the following links using your mobile browser:
+All the demos are available for download from this repository. Clone the repository or download the folder **demos**. Also, I've uploaded them to a temporary free hosting account which you can access with your mobile device:
 - [Simple demo](http://calirojas1.000webhostapp.com/vue-inspector/demos/simple)
 - [vue-router demo](http://calirojas1.000webhostapp.com/vue-inspector/demos/vue-router)
-- webpack demo (download the project)
+- [webpack demo](http://calirojas1.000webhostapp.com/vue-inspector/demos/webpack)
+- [webpack + Vuex demo](http://calirojas1.000webhostapp.com/vue-inspector/demos/webpack-vuex)
+
+**webpack users:** the property **assetsPublicPath** _(in config/index.js)_ were changed to '/vue-inspector/demos/webpack-vuex/'. Only for build. It's because I'm deploying the demo to a different directory instead server's root.
+
 
 ## Compatibility
 I have tested this tool only with Android phones and tablets. If you have information about the compatibility with iOS, or/and other mobile browsers, please let me know to update this list. I will appreciate any collaboration with compatibility testing. Currently tested/compatible with:
@@ -88,16 +106,24 @@ I have tested this tool only with Android phones and tablets. If you have inform
 
 ## Pending / In Progress
 - Events logging
-- Vuex support (state management) _(In progress)_
+- Vuex support _(state management)_ _(In progress / Basic support: Done)_
 - Support for Nuxt _(In progress)_
-- Improve variable type detection _(In progress)_
-- Add CDN **(the project needs at least 200 stars on GitHub)** _(In progress?)_
-- ~~Component rewrite~~ _(Done)_
-- ~~Support for vue-router~~ _(Done)_
-- ~~Publish npm module~~ _(Done)_
-- ~~Update screenshots to version 0.3.1~~ _(Done)_
 
 ## Changelog
+- **December 27th, 2017**
+  - Improved variable type detection
+  - **Console** tab removed _(now appears at the bottom)_
+  - Basic support for Vuex added _(new tab Vuex)_
+  - vue-router support improved _(new tab Router)_
+  - JavaScript console improvements
+  - UI changes and performance improvements
+  - Recursive components
+  - New props added: hide-lines, hide-vuex, hide-components, hide-router
+  - Optional separator lines to improve readability in devices with small screens _(prop **hide-lines**, by default = false)_
+  - New webpack demo using Vuex
+  - Screenshots updated to 0.4.0
+  - npm package released, version 0.4.0
+  - jsDelivr CDN added
 - **December 22th, 2017**
   - Improved support for vue-router
   - Fixed issue with Vuex

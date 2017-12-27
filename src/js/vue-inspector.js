@@ -1,5 +1,5 @@
 /*
-  vue-inspector v0.3.1
+  vue-inspector v0.4.0
   Vue.js Inspector for Mobile Devices
 
   Released under MIT License
@@ -22,13 +22,33 @@ Vue.component('vue-inspector', {
       type: Boolean,
       required: false,
       default: false
+    },
+    hideLines: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    hideVuex: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    hideComponents: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    hideRouter: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   components: {
     'vue-inspector-details': {
+      name: 'vue-inspector-details',
       props: {
         summary: {
-          type: String,
           required: true
         },
         data: {
@@ -37,24 +57,69 @@ Vue.component('vue-inspector', {
         context: {
           required: false,
           default: null
+        },
+        open: {
+          required: false,
+          default: true,
+          type: Boolean
+        },
+        hideLines: {
+          required: false,
+          type: Boolean,
+          default: true
+        }
+      },
+      methods: {
+        realTypeOf (theObject) {
+          return ({}).toString.call(theObject).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
         }
       },
       template: `
-        <details open v-if="data">
-          <summary>{{summary}}</summary>
-          <ul class="list-unstyled">
-            <li v-for="(value, key) in data">
-              {{key}}:
-              <code>
-                  {{context !== null ? JSON.stringify(value.call(context)) :
-                    (JSON.stringify(value) || typeof(value))
-                  }}
-              </code>
-              <span v-if="!context" class="label label-info pull-right">
-                  {{typeof(value)}}
-              </span>
-            </li>
-          </ul>
+        <details :open="open" v-if="data">
+          <summary :class="{'show-lines': !hideLines}">
+            {{summary}}
+            <span class="label label-info pull-right">
+              {{realTypeOf(data)}}
+            </span>
+          </summary>
+          <div class="details-content">
+            <ul class="list-unstyled" v-for="(value, key) in data" v-if="data">
+              <li v-if="typeof(value) == 'object'">
+                <vue-inspector-details :summary="key" :data="value"
+                class="details-children" :open="false" :hide-lines="hideLines"/>
+              </li>
+              <li v-else :class="{'show-lines': (typeof(value) === 'function' && context ? (typeof(value.call(context)) == 'object' ? false : !hideLines) : !hideLines)}">
+                <template v-if="typeof(value) === 'function' && context">
+                  <template v-if="typeof(value.call(context)) == 'object'">
+                    <vue-inspector-details :data="value.call(context)" :summary="key"
+                    :hide-lines="hideLines" :open="false" class="details-children"/>
+                  </template>
+                  <template v-else>
+                    {{key}}<span>:</span>
+                    <code>
+                      {{context !== null ? JSON.stringify(value.call(context)) :
+                        (JSON.stringify(value) || typeof(value))
+                      }}
+                    </code>
+                  </template>
+                </template>
+                <template v-else-if="typeof(value) === 'function' && !context">
+                  {{key}}
+                </template>
+                <template v-else>
+                  {{key}}<span>:</span>
+                  <code>
+                    {{context !== null ? JSON.stringify(value.call(context)) :
+                      (JSON.stringify(value) || typeof(value))
+                    }}
+                  </code>
+                </template>
+                <span v-if="!context" class="label label-info pull-right">
+                    {{realTypeOf(value)}}
+                </span>
+              </li>
+            </ul>
+          </div>
         </details>
       `
     }
@@ -73,33 +138,32 @@ Vue.component('vue-inspector', {
                 <h3 class="panel-title cursor-pointer">
                   {{thisComponent.name}} <span class="small">v{{thisComponent.version}}</span>
 
-                  <span class="pull-right" v-show="panel.minimized">&#9660;</span>
-                  <span class="pull-right" v-show="!panel.minimized">&#9650;</span>
+                  <span class="pull-right console-indicator" v-show="panel.minimized">&#9660;</span>
+                  <span class="pull-right console-indicator" v-show="!panel.minimized">&#9650;</span>
                 </h3>
                 <p class="cursor-pointer">
                   {{thisComponent.description}}
-                  <span class="pull-right" v-show="newOutputCount && panel.minimized">
-                    <small>Logs: {{getNewOutPutCountFormatted}}</small>
+                  <span class="pull-right console-indicator blinking-animation" v-show="panel.minimized && newOutputCount"
+                  @click="changeTab(2)">
+                    &#9888;
                   </span>
                 </p>
 
                 <ul class="nav nav-tabs vue-inspector__tabs" v-show="!panel.minimized">
-                  <li :class="{'active': panel.activeTab === 1}">
+                  <li :class="{'active': panel.activeTab === 1}" v-if="!hideComponents">
                     <a href="#" @click.prevent.stop="changeTab(1)">Components</a>
                   </li>
-                  <li :class="{'active': panel.activeTab === 2}">
-                    <a href="#" @click.prevent.stop="changeTab(2)">
-                      Console
-                      <span class="badge counter" v-show="newOutputCount && panel.activeTab !== 2">
-                        {{getNewOutPutCountFormatted}}
-                      </span>
-                    </a>
+                  <li :class="{'active': panel.activeTab === 3}" v-if="!hideVuex">
+                    <a href="#" @click.prevent.stop="changeTab(3)">Vuex</a>
+                  </li>
+                  <li :class="{'active': panel.activeTab === 4}" v-if="!hideRouter">
+                    <a href="#" @click.prevent.stop="changeTab(4)">Router</a>
                   </li>
                   <li class="pull-right vue-inspector__header-refresh"
-                  v-show="panel.activeTab === 1">
+                  v-show="panel.activeTab === 1" v-if="!hideComponents">
                     <a href="#" @click.prevent.stop="refresh">&olarr;</a>
                   </li>
-                  <li class="pull-right vue-inspector__header-back"
+                  <li class="pull-right vue-inspector__header-back" v-if="!hideComponents"
                   v-show="panel.activeTab === 1 && parentFilter !== rootInstance._uid">
                     <a href="#" @click.prevent.stop="displayComponent(activeComponent.$parent._uid)">&lt;</a>
                   </li>
@@ -111,64 +175,19 @@ Vue.component('vue-inspector', {
               </div>
               <div class="panel-body panel-content smalls" v-show="!panel.minimized"
               :style="{'height': panel.height + 'px', 'min-height': panel.minHeight + 'px'}">
-                <div v-show="panel.activeTab === 1 && panel.minimized == false">
-                  <details v-if="rootInstance.$router">
-                    <summary>&lt;router&gt;</summary>
-                    <ul class="list-unstyled">
-                      <li>mode: <code>{{rootInstance.$router.mode}}</code></li>
-                    </ul>
-                    <details>
-                      <summary>routes</summary>
-                      <ul class="list-unstyled">
-                        <li v-for="route in rootInstance.$router.options.routes">
-                          <router-link :to="route.path">{{route.path}}</router-link>
-                          <router-link :to="route.path" class="label label-warning pull-right">
-                            &lt;{{route.component.name || 'anonymous'}}&gt;
-                          </router-link>
-                        </li>
-                      </ul>
-                    </details>
-                    <details>
-                      <summary>current route</summary>
-                      <ul class="list-unstyled">
-                        <li>
-                          path:
-                          <code>{{JSON.stringify(rootInstance.$route.path) || typeof(rootInstance.$route.path)}}</code>
-                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.path)}}</span>
-                        </li>
-                        <li>
-                          fullPath:
-                          <code>{{JSON.stringify(rootInstance.$route.fullPath) || typeof(rootInstance.$route.fullPath)}}</code>
-                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.fullPath)}}</span>
-                        </li>
-                        <li>
-                          meta:
-                          <code>{{JSON.stringify(rootInstance.$route.meta) || typeof(rootInstance.$route.meta)}}</code>
-                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.meta)}}</span>
-                        </li>
-                        <li>
-                          params:
-                          <code>{{JSON.stringify(rootInstance.$route.params) || typeof(rootInstance.$route.params)}}</code>
-                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.params)}}</span>
-                        </li>
-                        <li>
-                          query:
-                          <code>{{JSON.stringify(rootInstance.$route.query) || typeof(rootInstance.$route.query) }}</code>
-                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.query)}}</span>
-                        </li>
-                        <li>
-                          hash:
-                          <code>{{JSON.stringify(rootInstance.$route.hash) || typeof(rootInstance.$route.hash)}}</code>
-                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.hash)}}</span>
-                        </li>
-                        <li>
-                          name:
-                          <code>{{JSON.stringify(rootInstance.$route.name) || typeof(rootInstance.$route.name)}}</code>
-                          <span class="label label-default pull-right">{{typeof(rootInstance.$route.name)}}</span>
-                        </li>
-                      </ul>
-                    </details>
-                  </details>
+                <div class="alert alert-warning alert-dismissable" v-if="newOutputCount && panel.activeTab !== 2">
+                  <a href="#" class="close" @click.prevent="resetNewOutputCount">&times;</a>
+                  <p class="small" v-if="newOutputCount">
+                    &#9888;
+                    <span v-show="newOutputCount > maxOutoutMessages">
+                      Are you sure everything is OK? You have more than
+                    </span>
+                    <a href="#" @click.prevent=" changeTab(2)" class="alert-link">{{newOutputCount >= maxOutoutMessages ? maxOutoutMessages : newOutputCount}}
+                    message<span v-show="newOutputCount > 1">s</span></a>
+                    in the JavaScript console.
+                  </p>
+                </div>
+                <div v-show="panel.activeTab === 1 && panel.minimized == false" v-if="!hideComponents">
                   <details open>
                     <summary>&lt;{{
                         (
@@ -192,31 +211,39 @@ Vue.component('vue-inspector', {
                       </a>
                     </summary>
 
-                    <vue-inspector-details summary="data" :data="activeComponent.$data" vif="activeComponent.$data"/>
-                    <vue-inspector-details summary="computed"
+                    <vue-inspector-details summary="data" :data="activeComponent.$data" v-if="activeComponent.$data"
+                    :hide-lines="hideLines"/>
+                    <vue-inspector-details summary="computed" :hide-lines="hideLines"
                     :data="(activeComponent.$options ? activeComponent.$options.computed : activeComponent.options.computed)"
                     :context="activeComponent"/>
 
-                    <vue-inspector-details summary="props" :data="activeComponent._props"/>
+                    <vue-inspector-details summary="props" :data="activeComponent._props" :hide-lines="hideLines"/>
 
                     <template v-for="component in filteredComponents">
                       <details open v-if="component.$children">
-                        <summary>children</summary>
-                        <ul class="list-unstyled">
-                          <li v-for="children in component.$children" :key="children._uid"
-                          v-if="children.$options._componentTag !== thisComponent.name">
-                            <a href="#" @click.prevent="displayComponent(children._uid)">
-                              &lt;{{
-                                children.$options._componentTag || children.$options.el
-                                || children.$options.name || 'anonymous'
-                              }}&gt;
-                            </a>
-                            <span class="label label-warning pull-right"
-                            v-if="children.$options._componentTag === 'router-link'">to:
-                              {{children._props.to.name || children._props.to.path || children._props.to || '?'}}
-                            </span>
-                          </li>
-                        </ul>
+                        <summary :class="{'show-lines': !hideLines}">
+                          children
+                          <span class="label label-info pull-right">
+                            {{typeof(component.$children)}}
+                          </span>
+                        </summary>
+                        <div class="details-content">
+                          <ul class="list-unstyled">
+                            <li v-for="children in component.$children" :key="children._uid"
+                            v-if="children.$options._componentTag !== thisComponent.name" :class="{'show-lines': !hideLines}">
+                              <a href="#" @click.prevent="displayComponent(children._uid)">
+                                &lt;{{
+                                  children.$options._componentTag || children.$options.el
+                                  || children.$options.name || 'anonymous'
+                                }}&gt;
+                              </a>
+                              <router-link class="label label-warning pull-right cursor-pointer"
+                              v-if="children.$options._componentTag === 'router-link'" :to="children._props.to">to:
+                                {{children._props.to.name || children._props.to.path || children._props.to || '?'}}
+                              </router-link>
+                            </li>
+                          </ul>
+                        </div>
                       </details>
                     </template>
                   </details>
@@ -247,6 +274,84 @@ Vue.component('vue-inspector', {
                       <span v-else>{{log.message}}</span>
                     </li>
                   </ul>
+                </div>
+                <div v-show="panel.activeTab === 3 && panel.minimized === false" v-if="!hideVuex">
+                  <p v-if="!rootInstance.$store" class="text-muted small">
+                    Vuex store not detected
+                  </p>
+                  <div v-else>
+                    <details open>
+                      <summary>store</summary>
+                      <vue-inspector-details :hide-lines="hideLines" summary="state" :data="rootInstance.$store.state"/>
+                      <vue-inspector-details :hide-lines="hideLines" summary="getters" :data="rootInstance.$store.getters"/>
+                    </details>
+                  </div>
+                </div>
+                <div v-show="panel.activeTab === 4 && panel.minimized === false" v-if="!hideRouter">
+                  <p v-if="!rootInstance.$router" class="text-muted small">
+                    Router not detected
+                  </p>
+                  <div v-else>
+                    <details open>
+                      <summary>router</summary>
+                      <ul class="list-unstyled">
+                        <li :class="{'show-lines': !hideLines}">mode: <code>{{rootInstance.$router.mode}}</code></li>
+                      </ul>
+                      <vue-inspector-details :hide-lines="hideLines" :data="rootInstance.$router.options.routes"
+                      v-if="rootInstance.$router.options" summary="routes" :open="false"/>
+                      <details open>
+                        <summary :class="{'show-lines': !hideLines}">current route</summary>
+                        <ul class="list-unstyled">
+                          <li :class="{'show-lines': !hideLines}">
+                            path:
+                            <code>{{JSON.stringify(rootInstance.$route.path) || typeof(rootInstance.$route.path)}}</code>
+                            <span class="label label-info pull-right">{{typeof(rootInstance.$route.path)}}</span>
+                          </li>
+                          <li :class="{'show-lines': !hideLines}">
+                            fullPath:
+                            <code>{{JSON.stringify(rootInstance.$route.fullPath) || typeof(rootInstance.$route.fullPath)}}</code>
+                            <span class="label label-info pull-right">{{typeof(rootInstance.$route.fullPath)}}</span>
+                          </li>
+                          <li :class="{'show-lines': !hideLines}">
+                            meta:
+                            <code>{{JSON.stringify(rootInstance.$route.meta) || typeof(rootInstance.$route.meta)}}</code>
+                            <span class="label label-info pull-right">{{typeof(rootInstance.$route.meta)}}</span>
+                          </li>
+                          <li :class="{'show-lines': !hideLines}">
+                            params:
+                            <code>{{JSON.stringify(rootInstance.$route.params) || typeof(rootInstance.$route.params)}}</code>
+                            <span class="label label-info pull-right">{{typeof(rootInstance.$route.params)}}</span>
+                          </li>
+                          <li :class="{'show-lines': !hideLines}">
+                            query:
+                            <code>{{JSON.stringify(rootInstance.$route.query) || typeof(rootInstance.$route.query) }}</code>
+                            <span class="label label-info pull-right">{{typeof(rootInstance.$route.query)}}</span>
+                          </li>
+                          <li :class="{'show-lines': !hideLines}">
+                            hash:
+                            <code>{{JSON.stringify(rootInstance.$route.hash) || typeof(rootInstance.$route.hash)}}</code>
+                            <span class="label label-info pull-right">{{typeof(rootInstance.$route.hash)}}</span>
+                          </li>
+                          <li :class="{'show-lines': !hideLines}">
+                            name:
+                            <code>{{JSON.stringify(rootInstance.$route.name) || typeof(rootInstance.$route.name)}}</code>
+                            <span class="label label-info pull-right">{{typeof(rootInstance.$route.name)}}</span>
+                          </li>
+                        </ul>
+                      </details>
+                      <details open>
+                        <summary :class="{'show-lines': !hideLines}">[navigate]</summary>
+                        <ul class="list-unstyled">
+                          <li :class="{'show-lines': !hideLines}" v-for="route in rootInstance.$router.options.routes">
+                            <router-link :to="route.path" class="no-active-route">{{route.path}}</router-link>
+                            <router-link :to="route.path" class="label label-warning pull-right">
+                              &lt;{{route.component.name || 'anonymous'}}&gt;
+                            </router-link>
+                          </li>
+                        </ul>
+                      </details>
+                    </details>
+                  </div>
                 </div>
 
                 <div class="panel-sizes">
@@ -283,6 +388,12 @@ Vue.component('vue-inspector', {
                       autocapitalize="none" v-model="commandInput" ref="commandInput">
                       <span class="input-group-btn">
                         <button class="btn btn-primary btn-md" type="submit">&check;</button>
+                        <button class="btn btn-danger btn-md" type="button"
+                        :class="{active: panel.activeTab == 2}"
+                        @click="toggleJSConsole" v-if="!allComponentsHidden">
+                          <span v-if="panel.activeTab == 2">&#8690;</span>
+                          <span v-else :class="{'blinking-animation': !panel.minimized && newOutputCount}">&#8689;</span>
+                        </button>
                       </span>
                     </div>
                   </div>
@@ -310,31 +421,43 @@ Vue.component('vue-inspector', {
       activeComponent: {},
       logs: [],
       newOutputCount: 0,
+      maxOutoutMessages: 200,
       commandInput: '',
       thisComponent: {
         name: 'vue-inspector',
         description: 'Vue.js Inspector for Mobile Devices',
-        version: '0.3.1',
+        version: '0.4.0',
         lastUpdate: 'December 22th, 2017',
         author: {
           name: 'Cali Rojas',
           email: 'calirojas@outlook.com',
           country: 'Costa Rica'
         }
-      }
+      },
+      allComponentsHidden: false
     }
   },
   computed: {
     getNewOutPutCountFormatted () {
       if (this.newOutputCount > 20) {
-        return '+20'
+        return '20+'
       } else {
         return this.newOutputCount
       }
     }
   },
   methods: {
-    reaalTypeOf (theObject) {
+    toggleJSConsole () {
+      if (this.panel.activeTab == 2) {
+        this.changeTab(1)
+      } else {
+        this.changeTab(2)
+      }
+    },
+    navigateTo (route) {
+      this.$router.push(route)
+    },
+    realTypeOf (theObject) {
         return ({}).toString.call(theObject).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
     },
     displayComponent (componentId) {
@@ -383,6 +506,9 @@ Vue.component('vue-inspector', {
         this.newOutputCount++
       }
     },
+    resetNewOutputCount () {
+      this.newOutputCount = 0
+    },
     consoleLog (...message) {
       this.appendLog({
         message: message.join(' '),
@@ -412,12 +538,17 @@ Vue.component('vue-inspector', {
       this.logs = []
     },
     appendLog (options) {
-      this.incrementOutputCounter()
+      let isHTML = false
+      let msg = JSON.stringify(options.message)
+
+      isHTML = (msg.indexOf('%c') !== -1 || msg.indexOf('%s') !== -1) || false
+
       this.logs.push({
         message: options.message,
-        isHTML: options.message.includes('%c') || options.message.includes('%s'),
+        isHTML,
         style: options.style
       })
+      this.incrementOutputCounter()
     },
     initConsole () {
       console.log = this.consoleLog
@@ -448,9 +579,9 @@ Vue.component('vue-inspector', {
       if (!this.commandInput.startsWith('console.')) {
         this.appendLog({
           message: (window.eval(this.commandInput) ? eval(this.commandInput) : 'undefined'),
-          style: 'primary'
+          style: 'primary',
+          isHTML: false
         })
-        this.incrementOutputCounter()
       } else {
         window.eval(this.commandInput)
       }
@@ -464,6 +595,12 @@ Vue.component('vue-inspector', {
     }
   },
   created () {
+    if (this.hideComponents && this.hideRouter && this.hideVuex) {
+      this.allComponentsHidden = true
+      this.panel.activeTab = 2
+    } else if (this.hideComponents || this.hideRouter || this.hideVuex) {
+      this.panel.activeTab = 2
+    }
     this.refresh()
     this.initConsole()
   },

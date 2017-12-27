@@ -1,9 +1,12 @@
 .vue-inspector{
 	$vue-primary-color: #35495E;
 	$vue-secondary-color: #41b883;
+	z-index: 333;
 
 	$icon-font-path: "~/fonts/bootstrap/";
 	@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+
+	border-top: solid 3px $vue-secondary-color !important;
 
 	::-webkit-scrollbar{
 		width: 5px;
@@ -51,81 +54,139 @@
 		.panel-title{
 			font-size: large;
 		}
-	}
 
-	.panel-body{
-		.panel-sizes{
-		}
-
-		overflow-x: auto;
-		overflow-y: scroll;
-		-webkit-overflow-scrolling: touch;
-		// max-height: 250px;
-		min-height: 250px;
-		height: 250px;
-
-		.list-unstyled{
-			li{
-				padding: 1px 0;
-			}
-		}
-
-		details{
-			ul{
-				&.list-unstyled{
-					padding-left: 15px !important;
-
-					li{
-						padding: 0 !important;
-						margin: 0;
-						padding-left: 30px;
-					}
-					margin-bottom: 5px;
-				}
-
-				&:empty{
-
-					&:after{
-						content: 'empty';
-						@extend .label;
-						@extend .label-default;
-						display: inline-block;
-						border-radius: 0;
-					}
-				}
+		.panel-body{
+			.panel-sizes{
 			}
 
-			summary{
-				outline: 0;
-				font-weight: bold;
-				cursor: pointer;
+			overflow-x: auto;
+			overflow-y: scroll;
+			-webkit-overflow-scrolling: touch;
+			min-height: 250px;
+			height: 250px;
+
+			.list-unstyled{
+				li{
+					padding: 1px 0;
+				}
 			}
 
 			details{
-				padding-left: 15px;
+				&.details-children{
+					padding-left: 0;
+
+					summary{
+						font-weight: normal !important;
+
+						&::-webkit-details-marker{
+						}
+					}
+				}
+
+				.details-content{
+					&:empty{
+						&:after{
+							content: 'empty';
+							@extend .label;
+							@extend .label-default;
+							display: inline-block;
+							border-radius: 0;
+							margin: 7px 0 3px 0;
+						}
+					}
+
+					ul{
+						&:empty{
+							&:after{
+								content: 'empty';
+								@extend .label;
+								@extend .label-default;
+								display: inline-block;
+								border-radius: 0;
+								margin: 7px 0 0 0;
+							}
+						}
+
+						li{
+							&:empty{
+								&:after{
+									content: 'Not available';
+									@extend .label;
+									@extend .label-danger;
+									display: inline-block;
+									border-radius: 0;
+									margin: 7px 0 0 0;
+								}
+							}
+						}
+					}
+				}
+
+				ul{
+					&.list-unstyled{
+						padding-left: 15px !important;
+
+						li{
+							padding: 3px 0 !important;
+							margin: 0;
+
+							&.show-lines{
+								border-bottom: dotted 1px #ccc !important;
+							}
+						}
+						margin-bottom: 0;
+					}
+				}
+
+				summary{
+					outline: 0;
+					font-weight: bold;
+					cursor: pointer;
+					padding: 3px 0;
+					// padding: 0;
+
+					&.show-lines{
+						border-bottom: dotted 1px #ccc !important;
+					}
+				}
+
+				details{
+					padding-left: 15px;
+
+					details{
+						padding-left: 0;
+
+						summary{
+							border: 0 !important;
+						}
+					}
+				}
+			}
+		}
+
+		.panel-heading{
+			padding-bottom: 0;
+			background-color: #35495E !important;
+			overflow: hidden;
+			border: 0 !important;
+			user-select: none;
+
+			span.badge.counter{
+				background-color: #000;
+				color: #fff;
+				border: 0;
+				padding: 2px 5px;
+			}
+
+			img{
+				height: 35px;
+				margin-right: 5px;
+				display: inline-block;
 			}
 		}
 	}
 
-	.panel-heading{
-		padding-bottom: 0;
-		background-color: #35495E !important;
-		overflow: hidden;
-		border: 0 !important;
 
-		span.badge.counter{
-			background-color: #000;
-			color: #fff;
-			border: 0;
-			padding: 2px 5px;
-		}
-
-		img{
-			height: 35px;
-			margin-right: 5px;
-			display: inline-block;
-		}
-	}
 
 	&__output-counter{
 
@@ -137,7 +198,7 @@
 
 		&>li{
 			&>a{
-				padding: 10px 12px !important;
+				padding: 8px 8px !important;
 				background: #35495E;
 				min-width: 40px;
 				text-align: center;
@@ -173,11 +234,31 @@
 		color: #fff;
 		border-color: #41b883;
 		border-width: 1px;
+
+		&:hover, &:focus, &:active{
+			background: #349268 !important;
+			color: #fff;
+			border-color: #41b883 !important;
+		}
+
+		&.active{
+			border-color: #349268;
+			background: #41b883;
+
+			&:hover, &:focus, &:active{
+				background: #349268 !important;
+				border-color: #41b883 !important;
+			}
+		}
 	}
 	.btn-primary{
 		background: #35495E;
 		color: #fff;
 		border-color: #35495E;
+
+		&:hover, &:focus{
+			background: #35495E;
+		}
 	}
 
 	.btn-empty{
@@ -198,4 +279,56 @@
 	.label.pull-right {
 		display: inline-table;
 	}
+
+	.alert-warning{
+		margin-bottom: 10px;
+		padding: 10px;
+		padding-right: 35px;
+	}
+
+	.console-indicator{
+		width: 40px;
+		text-align: center;
+	}
+
+	.blinking-animation{
+		animation: blink-animation .4s infinite;
+	}
+	@keyframes blink-animation{
+		0%{
+			opacity: 1;
+			transform: scale(1.2);
+		}
+		50%{
+			opacity: .8;
+			transform: scale(1);
+		}
+		100%{
+			opacity: 1;
+			transform: scale(1.2);
+		}
+	}
+
+	.router-link-exact-active{
+		position: relative;
+
+		&:before{
+			content: '';
+			height: 5px;
+			width: 5px;
+			border-radius: 50%;
+			left: -10px;
+			top: 40%;
+			position: absolute;
+			@extend .bg-danger;
+		}
+
+		&.no-active-route{
+			&:before{
+				display: none;
+			}
+		}
+	}
 }
+
+//I'll fix this spaghetti later :P
