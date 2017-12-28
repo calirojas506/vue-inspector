@@ -81,6 +81,10 @@ The following properties are available _(all of them are Boolean and optional)_:
 If you hide any of the tabs _(Components, Vuex or Router)_ the console will be shown by default. The console can not be hidden or disabled.
 
 
+<iframe height='265' scrolling='no' title='vue-inspector demo' src='//codepen.io/calirojas506/embed/baqLxb/?height=265&theme-id=dark&default-tab=html,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/calirojas506/pen/baqLxb/'>vue-inspector demo</a> by Cali Rojas (<a href='https://codepen.io/calirojas506'>@calirojas506</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+
 ## Screenshots
 **Important:** sometimes these screenshots are not updated. Check the demos, so you can see the latest version running ;)
 
