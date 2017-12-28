@@ -24,6 +24,8 @@ With **vue-inspector** is possible to execute JavaScript code directly in your m
 - Supports vue-router
 
 ## Installing vue-inspector via Yarn or npm
+![](/images/npm.png)
+
 Installing with npm:
 
 ```shell
@@ -31,6 +33,8 @@ npm install --save-dev vue-inspector
 ```
 
 [![NPM](https://nodei.co/npm/vue-inspector.png?mini=true)](https://npmjs.org/package/vue-inspector)
+
+![](/images/yarn.png)
 
 Using Yarn:
 ```shell
@@ -43,6 +47,7 @@ JavaScript:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.2/dist/js/vue-inspector.min.js"></script>
 ```
+![](/images/jsdelivr.png)
 
 CSS:
 ```html
