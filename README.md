@@ -1,4 +1,4 @@
-# vue-inspector 0.4.2
+# vue-inspector 0.4.3
 Vue.js Inspector for Mobile Devices
 
 
@@ -17,7 +17,7 @@ With **vue-inspector** is possible to execute JavaScript code directly in your m
 ## Features
 - Works with Vue.js 2
 - Reactive _(of course)_
-- Instance routes, data and computed properties inspection
+- Routes, data, Vuex and computed properties inspection
 - Integrated JavaScript _(basic)_ console for code execution and messages/errors logging
 - Navigation inside components and their children _(with inspection)_
 - Responsive and simple UI
@@ -45,13 +45,13 @@ yarn add --dev vue-inspector
 
 JavaScript:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.2/dist/js/vue-inspector.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.3/dist/js/vue-inspector.min.js"></script>
 ```
 ![](/images/jsdelivr.png)
 
 CSS:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.2/dist/css/vue-inspector.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-inspector@0.4.3/dist/css/vue-inspector.min.css">
 ```
 ## How to use vue-inspector?
 Install using npm or Yarn, then add **vue-inspector** _(CSS and JavaScript files)_ to your project. Last step is adding the **&lt;vue-inspector/&gt;** component inside your app wrapper _(**el**)_.
@@ -124,10 +124,13 @@ I have tested this tool only with Android phones and tablets. If you have inform
 
 ## Pending / In Progress
 - Events logging
-- Vuex support _(state management)_ _(In progress / Basic support: Done)_
+- Firebase bindings
 - Support for Nuxt _(In progress)_
 
 ## Changelog
+- **January 27th, 2018**
+  - Improved support for Date objects
+  - Version 0.4.3 released _(npm)_
 - **December 26th, 2017**
   - Improved variable type detection
   - **Console** tab removed _(now appears at the bottom)_

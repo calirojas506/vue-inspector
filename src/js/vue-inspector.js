@@ -1,9 +1,9 @@
 /*
-  vue-inspector v0.4.0
+  vue-inspector v0.4.3
   Vue.js Inspector for Mobile Devices
 
   Released under MIT License
-  Copyright (c) 2017 Cali Rojas
+  Copyright (c) 2017-2018 Cali Rojas
   https://github.com/calirojas506/vue-inspector
 */
 
@@ -84,7 +84,16 @@ Vue.component('vue-inspector', {
           </summary>
           <div class="details-content">
             <ul class="list-unstyled" v-for="(value, key) in data" v-if="data">
-              <li v-if="typeof(value) == 'object'">
+              <li v-if="realTypeOf(value) === 'date'">
+                {{key}}<span>:</span>
+                <code>
+                  {{JSON.stringify(value) || typeof(value)}}
+                </code>
+                <span class="label label-info pull-right">
+                    {{realTypeOf(value)}}
+                </span>
+              </li>
+              <li v-else-if="typeof(value) == 'object'">
                 <vue-inspector-details :summary="key" :data="value"
                 class="details-children" :open="false" :hide-lines="hideLines"/>
               </li>
@@ -259,7 +268,7 @@ Vue.component('vue-inspector', {
                   <p class="text-muted">
                     <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>
                     <br>
-                    Copyright &copy; 2017,
+                    Copyright &copy; 2017-2018,
                     <a href="https://github.com/calirojas506/vue-inspector" target="_blank">Cali Rojas</a>
                     <span class="small pull-right">&hearts; Costa Rica</span>
                   </p>
@@ -426,8 +435,8 @@ Vue.component('vue-inspector', {
       thisComponent: {
         name: 'vue-inspector',
         description: 'Vue.js Inspector for Mobile Devices',
-        version: '0.4.2',
-        lastUpdate: 'December 26th, 2017',
+        version: '0.4.3',
+        lastUpdate: 'January 27th, 2018',
         author: {
           name: 'Cali Rojas',
           email: 'calirojas@outlook.com',
