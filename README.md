@@ -181,4 +181,4 @@ I have tested this tool only with Android phones and tablets. If you have inform
 [MIT](http://opensource.org/licenses/MIT)
 
 
-Copyright (c) 2017, Cali Rojas
+Copyright (c) 2017-2018, Cali Rojas
